@@ -4,6 +4,8 @@ namespace AracKiralama.ViewModels
 {
     public class UserModel : BaseModel
     {
+        public string Id { get; set; }
+
         [Display(Name = "Adı Soyadı")]
         [Required(ErrorMessage = "Adı Soyadı Giriniz!")]
         public string FullName { get; set; }
