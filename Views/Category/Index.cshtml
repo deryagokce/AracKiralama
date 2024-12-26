@@ -3,9 +3,28 @@
 }
 @model List<CategoryModel>
 @section CardHeader {
-        <span>Kategoriler</span>
+    <span>Kategoriler</span>
 }
-<a asp-action="Add" asp-controller="Category" class="btn btn-primary btn-sm mb-2">Ekle</a>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <form id="categoryForm" class="row g-2">
+            <div class="col-6">
+                <input type="text" id="categoryName" class="form-control form-control-sm" placeholder="Kategori Adı" required />
+            </div>
+            <div class="col-auto d-flex align-items-center">
+                <div class="form-check">
+                    <input type="checkbox" id="categoryIsActive" class="form-check-input" checked />
+                    <label class="form-check-label">Aktif</label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary btn-sm">Ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -17,29 +36,90 @@
             <th>Düzenle - Sil</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="categoryTableBody">
         @foreach (var item in Model)
         {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
                     @if (item.IsActive)
                     {
-                                <span class="badge bg-success text-white">Aktif</span>
+                        <span class="badge bg-success text-white">Aktif</span>
                     }
                     else
                     {
-                                <span class="badge bg-danger text-white">Pasif</span>
+                        <span class="badge bg-danger text-white">Pasif</span>
                     }
-                    </td>
-                    <td>@item.Created</td>
-                    <td>@item.Updated</td>
-                    <td>
-                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Düzenle</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Sil</a>
-                    </td>
-                </tr>
+                </td>
+                <td>@item.Created</td>
+                <td>@item.Updated</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#categoryForm").on("submit", function (e) {
+                e.preventDefault();
+
+                var formData = {
+                    name: $("#categoryName").val(),
+                    isActive: $("#categoryIsActive").prop("checked")
+                };
+
+                console.log("Gönderilen veri:", formData);
+
+                $.ajax({
+                    url: '@Url.Action("AddAjax", "Category")',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        console.log("Sunucudan gelen yanıt:", response);
+                        if (response.success) {
+                            // Yeni satırı oluştur
+                            var newRow = `
+                                <tr>
+                                    <td>${response.category.id}</td>
+                                    <td>${response.category.name}</td>
+                                    <td>
+                                        ${response.category.isActive
+                                            ? '<span class="badge bg-success text-white">Aktif</span>'
+                                            : '<span class="badge bg-danger text-white">Pasif</span>'}
+                                    </td>
+                                    <td>${new Date(response.category.created).toLocaleString()}</td>
+                                    <td>${new Date(response.category.updated).toLocaleString()}</td>
+                                    <td>
+                                        <a href="/Category/Update/${response.category.id}" class="btn btn-primary btn-sm">Düzenle</a>
+                                        <a href="/Category/Delete/${response.category.id}" class="btn btn-danger btn-sm">Sil</a>
+                                    </td>
+                                </tr>`;
+
+                            // Tabloyu güncelle
+                            $("#categoryTableBody").append(newRow);
+
+                            // Formu temizle
+                            $("#categoryName").val('');
+                            $("#categoryIsActive").prop('checked', true);
+
+                            toastr.success(response.message);
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Hata detayı:", xhr.responseText);
+                        toastr.error("Bir hata oluştu: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+}

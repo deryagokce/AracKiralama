@@ -58,6 +58,48 @@ namespace AracKiralama.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddAjax([FromBody] CategoryModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { success = false, message = "Form verileri geçerli değil!" });
+            }
+
+            try
+            {
+                var category = new Category
+                {
+                    Name = model.Name,
+                    IsActive = model.IsActive,
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now
+                };
+
+                await _categoryRepository.AddAsync(category);
+
+                int catCount = _categoryRepository.Where(c => c.IsActive == true).Count();
+                await _generalHub.Clients.All.SendAsync("onCategoryAdd", catCount);
+
+                return Json(new
+                {
+                    success = true,
+                    message = "Kategori başarıyla eklendi.",
+                    category = new
+                    {
+                        id = category.Id,
+                        name = category.Name,
+                        isActive = category.IsActive,
+                        created = category.Created,
+                        updated = category.Updated
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Kategori eklenirken bir hata oluştu: " + ex.Message });
+            }
+        }
 
         public async Task<IActionResult> Update(int id)
         {
