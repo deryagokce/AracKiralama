@@ -4,6 +4,7 @@ using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using AracKiralama.Hubs;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using AracKiralama.Localisation;
@@ -56,6 +57,10 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.ExpireTimeSpan = TimeSpan.FromDays(15);
     opt.SlidingExpiration = true;
 });
+
+builder.Services.AddSignalR();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -77,4 +82,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapHub<GeneralHub>("/general-hub");
 app.Run();
