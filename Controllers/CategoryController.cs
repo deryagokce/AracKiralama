@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AracKiralama.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class CategoryController : Controller
     {
         private readonly CategoryRepository _categoryRepository;
