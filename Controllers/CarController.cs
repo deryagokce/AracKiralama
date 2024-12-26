@@ -50,6 +50,8 @@ namespace AracKiralama.Controllers
                 return View(model);
             }
             var car = _mapper.Map<Car>(model);
+            car.Created = DateTime.Now;
+            car.Updated = DateTime.Now;
             await _carRepository.AddAsync(car);
             _notyf.Success("Araba Eklendi...");
 
@@ -81,6 +83,7 @@ namespace AracKiralama.Controllers
             car.Name = model.Name;
             car.IsActive = model.IsActive;
             car.CategoryId = model.CategoryId;
+            car.Updated = DateTime.Now;
             await _carRepository.UpdateAsync(car);
             _notyf.Success("Araba Güncellendi...");
             return RedirectToAction("Index");
