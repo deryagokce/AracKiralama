@@ -15,21 +15,21 @@
             <span>Ana Sayfa</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="Category" asp-action="Index">
-            <i class="fas fa-fw fa-list"></i>
-            <span>Kategoriler</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-controller="Car" asp-action="Index">
-            <i class="fas fa-fw fa-list"></i>
-            <span>Arabalar</span>
-        </a>
-    </li>
+    
     @if (User.IsInRole("Admin"))
-
     {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Category" asp-action="Index">
+                <i class="fas fa-fw fa-list"></i>
+                <span>Kategoriler</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Car" asp-action="Index">
+                <i class="fas fa-fw fa-list"></i>
+                <span>Arabalar</span>
+            </a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" asp-controller="User" asp-action="Index">
                 <i class="fas fa-fw fa-user"></i>

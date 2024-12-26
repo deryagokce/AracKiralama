@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AracKiralama.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CarController : Controller
     {
         private readonly CarRepository _carRepository;
