@@ -9,6 +9,7 @@ namespace AracKiralama.Mapping
         public MapProfile()
         {
             CreateMap<Car, CarModel>().ReverseMap();
+            CreateMap<Category, CategoryModel>().ReverseMap();
         }
     }
 }

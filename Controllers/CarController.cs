@@ -2,15 +2,18 @@
 using AracKiralama.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using AracKiralama.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AracKiralama.Controllers
 {
     public class CarController : Controller
        {
         private readonly CarRepository _carRepository;
-        public CarController(CarRepository carRepository)
+        private readonly CategoryRepository _categoryRepository;
+        public CarController(CarRepository carRepository, CategoryRepository categoryRepository)
         {
             _carRepository = carRepository;
+            _categoryRepository = categoryRepository;
         }
         public IActionResult Index()
         {
@@ -19,6 +22,12 @@ namespace AracKiralama.Controllers
         }
         public IActionResult Add()
         {
+            var categories = _categoryRepository.GetList().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+            ViewBag.Categories = categories;
             return View();
         }
         [HttpPost]
@@ -33,6 +42,12 @@ namespace AracKiralama.Controllers
         }
         public IActionResult Update(int id)
         {
+            var categories = _categoryRepository.GetList().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+            ViewBag.Categories = categories;
             var car = _carRepository.GetById(id);
             return View(car);
         }

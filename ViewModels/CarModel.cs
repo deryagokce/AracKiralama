@@ -13,5 +13,8 @@ namespace AracKiralama.ViewModels
         public int Price { get; set; }
         [Display(Name = "Mevcut")]
         public bool IsActive { get; set; }
+        [Display(Name = "Kategori")]
+        [Required(ErrorMessage = "Kategori Giriniz!")]
+        public int CategoryId { get; set; }
     }
 }

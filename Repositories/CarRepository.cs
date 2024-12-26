@@ -41,6 +41,7 @@ namespace AracKiralama.Repositories
                     car.Name = model.Name;
                     car.Price = model.Price;
                     car.IsActive = model.IsActive;
+                    car.CategoryId = model.CategoryId;
                 _context.Cars.Update(car);
                 _context.SaveChanges();
                 }
