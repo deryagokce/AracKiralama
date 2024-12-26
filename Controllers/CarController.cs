@@ -1,6 +1,7 @@
 ﻿using AracKiralama.Models;
 using AracKiralama.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using AracKiralama.ViewModels;
 
 namespace AracKiralama.Controllers
 {
@@ -21,7 +22,7 @@ namespace AracKiralama.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(Car model)
+        public IActionResult Add(CarModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -36,7 +37,7 @@ namespace AracKiralama.Controllers
             return View(car);
         }
         [HttpPost]
-        public IActionResult Update(Car model)
+        public IActionResult Update(CarModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +52,7 @@ namespace AracKiralama.Controllers
             return View(car);
         }
         [HttpPost]
-        public IActionResult Delete(Car model)
+        public IActionResult Delete(CarModel model)
         {
             _carRepository.Delete(model.Id);
             return RedirectToAction("Index");
