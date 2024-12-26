@@ -3,73 +3,101 @@ using AracKiralama.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using AracKiralama.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 
 namespace AracKiralama.Controllers
 {
     public class CarController : Controller
-       {
+    {
         private readonly CarRepository _carRepository;
         private readonly CategoryRepository _categoryRepository;
-        public CarController(CarRepository carRepository, CategoryRepository categoryRepository)
+        private readonly IMapper _mapper;
+        private readonly INotyfService _notyf;
+
+        public CarController(CarRepository carRepository, CategoryRepository categoryRepository, IMapper mapper, INotyfService notyf)
         {
             _carRepository = carRepository;
             _categoryRepository = categoryRepository;
+            _mapper = mapper;
+            _notyf = notyf;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var cars = _carRepository.GetList();
-            return View(cars);
+            var cars = await _carRepository.GetAllAsync();
+            var carModels = _mapper.Map<List<CarModel>>(cars);
+            return View(carModels);
         }
-        public IActionResult Add()
+
+        public async Task<IActionResult> Add()
         {
-            var categories = _categoryRepository.GetList().Select(x => new SelectListItem()
+            var categories = await _categoryRepository.GetAllAsync();
+            var categoriesSelectList = categories.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
             });
-            ViewBag.Categories = categories;
+            ViewBag.Categories = categoriesSelectList;
             return View();
         }
+
         [HttpPost]
-        public IActionResult Add(CarModel model)
+        public async Task<IActionResult> Add(CarModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _carRepository.Add(model);
+            var car = _mapper.Map<Car>(model);
+            await _carRepository.AddAsync(car);
+            _notyf.Success("Araba Eklendi...");
+
             return RedirectToAction("Index");
         }
-        public IActionResult Update(int id)
+
+        public async Task<IActionResult> Update(int id)
         {
-            var categories = _categoryRepository.GetList().Select(x => new SelectListItem()
+            var categories = await _categoryRepository.GetAllAsync();
+            var categoriesSelectList = categories.Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
             });
-            ViewBag.Categories = categories;
-            var car = _carRepository.GetById(id);
-            return View(car);
+            ViewBag.Categories = categoriesSelectList;
+            var car = await _carRepository.GetByIdAsync(id);
+            var carModel = _mapper.Map<CarModel>(car);
+            return View(carModel);
         }
+
         [HttpPost]
-        public IActionResult Update(CarModel model)
+        public async Task<IActionResult> Update(CarModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            _carRepository.Update(model);
+            var car = await _carRepository.GetByIdAsync(model.Id);
+            car.Name = model.Name;
+            car.IsActive = model.IsActive;
+            car.CategoryId = model.CategoryId;
+            await _carRepository.UpdateAsync(car);
+            _notyf.Success("Araba Güncellendi...");
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id)
+
+        public async Task<IActionResult> Delete(int id)
         {
-            var car = _carRepository.GetById(id);
-            return View(car);
+            var car = await _carRepository.GetByIdAsync(id);
+            var carModel = _mapper.Map<CarModel>(car);
+            return View(carModel);
         }
+
         [HttpPost]
-        public IActionResult Delete(CarModel model)
+        public async Task<IActionResult> Delete(CarModel model)
         {
-            _carRepository.Delete(model.Id);
+            await _carRepository.DeleteAsync(model.Id);
+            _notyf.Success("Araba Silindi...");
             return RedirectToAction("Index");
         }
     }
