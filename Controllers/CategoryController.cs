@@ -3,10 +3,12 @@ using AracKiralama.Repositories;
 using AracKiralama.ViewModels;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AracKiralama.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly CategoryRepository _categoryRepository;

@@ -2,7 +2,9 @@
     Layout = "_LayoutAdmin";
 }
 @model List<CarModel>
-<h2>Arabalar</h2>
+@section CardHeader {
+    <span>Arabalar</span>
+}
 <hr />
 <a asp-action="Add" asp-controller="Car" class="btn btn-primary btn-sm mb-2">Ekle</a>
 @if (Model.Count == 0)

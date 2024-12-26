@@ -5,9 +5,11 @@ using AracKiralama.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AracKiralama.Controllers
 {
+    [Authorize]
     public class CarController : Controller
     {
         private readonly CarRepository _carRepository;
