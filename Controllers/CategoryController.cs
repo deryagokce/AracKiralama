@@ -32,6 +32,10 @@ namespace AracKiralama.Controllers
         {
             var categories = await _categoryRepository.GetAllAsync();
             var categoryModels = _mapper.Map<List<CategoryModel>>(categories);
+
+            int activeCategoryCount = categories.Count(c => c.IsActive);
+            await _generalHub.Clients.All.SendAsync("onCategoryAdd", activeCategoryCount);
+
             return View(categoryModels);
         }
 
