@@ -1,22 +1,210 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 76px;
 }
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-top: -24px;
+}
+
+.hero-content {
+    width: 100%;
+    padding: 20px;
+}
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+    }
+
+/* Features Section */
+.feature-box {
+    padding: 30px;
+    transition: transform 0.3s;
+}
+
+    .feature-box:hover {
+        transform: translateY(-10px);
+    }
+
+    .feature-box i {
+        font-size: 3rem;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+/* Car Cards */
+.car-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+    .car-card:hover {
+        transform: translateY(-5px);
+    }
+
+.car-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+    .car-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.car-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #007bff;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.car-details {
+    padding: 20px;
+}
+
+.car-features {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: #666;
+}
+
+.car-price {
+    margin: 15px 0;
+}
+
+    .car-price .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .car-price .period {
+        color: #666;
+    }
+
+/* Why Us Section */
+.why-us-item {
+    padding: 20px;
+}
+
+    .why-us-item i {
+        font-size: 2.5rem;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+
+/* CTA Section */
+.cta-section {
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .car-features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .car-features span {
+            margin: 5px 0;
+        }
+}
+
+/* Navbar Styles */
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: color 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #007bff !important;
+    }
+
+.btn-primary {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+    }
+
+/* Footer Styles */
+.footer {
+    background-color: #1a1a1a;
+}
+
+    .footer h5 {
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer .social-links a {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .footer .social-links a:hover {
+            background-color: #007bff;
+            transform: translateY(-3px);
+        }

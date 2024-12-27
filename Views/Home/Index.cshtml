@@ -1,32 +1,164 @@
 ﻿@{
-    ViewData["Title"] = "Araç Kiralama Sitesi";
+    ViewData["Title"] = "Gökce Auto - Araç Kiralama";
 }
 
-<div class="text-center">
-    <h2 class="display-4"><b>Gökce Auto</b></h2>
-    <p><em>"Yolların Keyfini Bizimle Çıkar!"</em></p>
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Yolculuğunuzu Bizimle Planlayın</h1>
+        <p class="lead">En uygun fiyatlarla lüks ve konforlu araçlar</p>
+        <a href="#araclar" class="btn btn-primary btn-lg">Araçları Keşfet</a>
+    </div>
 </div>
 
-<div class="text-center">
-    <h2>Araçlarımız</h2>
-    <div>
-        <img src="/CarPage/toyota corolla.jpg" alt="Toyota Corolla" width="500" />
-        <p><b> Toyota Corolla</b></p>
+<!-- Features Section -->
+<section class="features-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Geniş Araç Filosu</h3>
+                    <p>Ekonomik araçlardan lüks araçlara kadar geniş seçenek</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Tam Sigorta</h3>
+                    <p>Tüm araçlarımız tam sigorta kapsamında</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <i class="fas fa-clock"></i>
+                    <h3>7/24 Destek</h3>
+                    <p>Her an yanınızdayız</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <img src="/CarPage/i7-sedandigertaraf.jpg" alt="BMW i7" width="700" />
-        <p><b>BMW i7</b></p>
+</section>
+
+<!-- Car Listing Section -->
+<section id="araclar" class="cars-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Araç Filomuzu Keşfedin</h2>
+        <div class="row">
+            <!-- Toyota Corolla -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="/CarPage/toyota corolla.jpg" alt="Toyota Corolla" class="img-fluid">
+                        <div class="car-tag">Popüler</div>
+                    </div>
+                    <div class="car-details">
+                        <h3>Toyota Corolla</h3>
+                        <div class="car-features">
+                            <span><i class="fas fa-gas-pump"></i> Benzin</span>
+                            <span><i class="fas fa-cog"></i> Otomatik</span>
+                            <span><i class="fas fa-users"></i> 5 Kişilik</span>
+                        </div>
+                        <div class="car-price">
+                            <span class="price">₺1.000</span>
+                            <span class="period">/günlük</span>
+                        </div>
+                        <a href="/Home/KiralamaFormu?arac=ToyotaCorolla" class="btn btn-primary w-100">Hemen Kirala</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMW i7 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="/CarPage/i7-sedandigertaraf.jpg" alt="BMW i7" class="img-fluid">
+                        <div class="car-tag">Lüks</div>
+                    </div>
+                    <div class="car-details">
+                        <h3>BMW i7</h3>
+                        <div class="car-features">
+                            <span><i class="fas fa-charging-station"></i> Elektrik</span>
+                            <span><i class="fas fa-cog"></i> Otomatik</span>
+                            <span><i class="fas fa-users"></i> 5 Kişilik</span>
+                        </div>
+                        <div class="car-price">
+                            <span class="price">₺2.500</span>
+                            <span class="period">/günlük</span>
+                        </div>
+                        <a href="/Home/KiralamaFormu?arac=BMWi7" class="btn btn-primary w-100">Hemen Kirala</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Porsche 911 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="car-card">
+                    <div class="car-image">
+                        <img src="/CarPage/2025-porsche-911-carreraa.jpg" alt="Porsche 911 Carrera" class="img-fluid">
+                        <div class="car-tag">Premium</div>
+                    </div>
+                    <div class="car-details">
+                        <h3>Porsche 911 Carrera</h3>
+                        <div class="car-features">
+                            <span><i class="fas fa-gas-pump"></i> Benzin</span>
+                            <span><i class="fas fa-cog"></i> Otomatik</span>
+                            <span><i class="fas fa-users"></i> 2 Kişilik</span>
+                        </div>
+                        <div class="car-price">
+                            <span class="price">₺3.500</span>
+                            <span class="period">/günlük</span>
+                        </div>
+                        <a href="/Home/KiralamaFormu?arac=Porsche911" class="btn btn-primary w-100">Hemen Kirala</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <img src="/CarPage/Ekran görüntüsü 2024-12-26 210134.jpg" alt="Renault Taliant 1.0 Joy" width="500" />
-        <p><b>Renault Taliant 1.0 Joy</b></p>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-us-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Neden Bizi Tercih Etmelisiniz?</h2>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="why-us-item">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>En İyi Fiyat Garantisi</h4>
+                    <p>Piyasadaki en uygun fiyatları sunuyoruz</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="why-us-item">
+                    <i class="fas fa-car"></i>
+                    <h4>Yeni Araçlar</h4>
+                    <p>Tüm araçlarımız son model</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="why-us-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Ücretsiz Teslimat</h4>
+                    <p>İstediğiniz lokasyona teslimat</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="why-us-item">
+                    <i class="fas fa-headset"></i>
+                    <h4>7/24 Destek</h4>
+                    <p>Her zaman yanınızdayız</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <img src="/CarPage/2025-porsche-911-carreraa.jpg" alt="Porsche 911 Carrera" width="700" />
-        <p><b>Porsche 911 Carrera</b></p>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section py-5">
+    <div class="container text-center">
+        <h2>Hemen Rezervasyon Yapın</h2>
+        <p class="lead">Size en uygun aracı seçin ve yolculuğunuza başlayın</p>
+        <a href="/Home/KiralamaFormu" class="btn btn-primary btn-lg">Rezervasyon Yap</a>
     </div>
-    <div>
-        <img src="/CarPage/Porsche_911_Carrera_S_Cabriolet_2022.jpg" alt="Porsche 911 Carrera S Cabriolet 2022" width="500" />
-        <p><b>Porsche 911 CarreraS Cabriolet 2022</b></p>
-    </div>
-</div>
+</section>
